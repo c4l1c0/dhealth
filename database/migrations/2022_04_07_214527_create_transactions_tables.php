@@ -15,10 +15,6 @@ return new class extends Migration
 	{
 		Schema::create('transactions', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('user_id')->
-				constrained('transactions')->
-				restrictOnUpdate()->
-				restrictOnDelete();
             $table->softDeletes();
 			$table->foreignId('created_by')->
 				constrained('users')->
