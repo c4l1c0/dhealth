@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\SignaController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
