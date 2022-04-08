@@ -27,4 +27,7 @@ Route::middleware(['auth'])->group(function () {
 	})->name('dashboard');
 
 	Route::resource('medicines', MedicineController::class);
+	Route::resource('signas', SignaController::class);
+	Route::resource('recipes', RecipeController::class);
+	Route::resource('transactions', TransactionController::class);
 });
