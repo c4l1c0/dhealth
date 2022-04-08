@@ -19,23 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
 Route::middleware(['auth'])->group(function () {
 	Route::get('/dashboard', function () {
 		return view('dashboard');
-	}
+	})->name('dashboard');
 
 	Route::resource('medicines', MedicineController::class);
 });
-
-})->middleware(['auth'])->name('dashboard');
-
-
-require __DIR__.'/auth.php';
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
