@@ -31,9 +31,16 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+					<!-- Left Side Of Navbar 
+                            <a class="nav-link {{'/dashboard'==request()->path()?'active':''}}" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+-->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+                        </li>
+						<li class="nav-item">
+                            <a class="nav-link {{ Route::is('medicines.index') ? 'active' : '' }}" href="{{ route('medicines.index') }}">{{ __('Medicines') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
