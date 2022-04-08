@@ -11,7 +11,7 @@ class Medicine extends Model
 {
 	use HasFactory, SoftDeletes;
 
-	protected $fillable = ['codename', 'name', 'stock', 'additional_data'];
+	protected $fillable = ['codename', 'name', 'stock', 'additional_data', 'created_at'];
 
 	public function createdBy()
     {

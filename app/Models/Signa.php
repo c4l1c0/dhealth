@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Signa extends Model
 {
     use HasFactory, softDeletes;
 
-	protected $fillable = ['codename', 'name', 'additional_data'];
+	protected $fillable = ['codename', 'name', 'additional_data', 'created_at'];
 
 	public function transactionItem(){
 		return $this->belongsTo(TransactionItem::Class);
@@ -37,4 +39,5 @@ class Signa extends Model
 			$model->is_deleted = 1;
 			$model->is_active = 0;
 		});
+	}
 }
