@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MedicineController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::middleware(['auth'])->group(function () {
+	Route::get('/dashboard', function () {
+		return view('dashboard');
+	}
+
+	Route::resource('medicines', MedicineController::class);
+});
+
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/medicine', function () {
-    return view('medicine');
-})->middleware(['auth'])->name('medicine');
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
