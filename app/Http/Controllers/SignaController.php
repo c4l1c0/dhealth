@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Signa;
+use Illuminate\Support\Facades\Session;
 
 class SignaController extends Controller
 {
@@ -13,7 +15,8 @@ class SignaController extends Controller
      */
     public function index()
     {
-        //
+		$signas = Signa::with('createdBy')->paginate(20);
+		return view('signas.index', ['signas' => $signas]);
     }
 
     /**
@@ -23,7 +26,7 @@ class SignaController extends Controller
      */
     public function create()
     {
-        //
+		return view('signas.form');
     }
 
     /**
@@ -34,7 +37,18 @@ class SignaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+		]);
+
+		$db = Signa::create($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Saved successfully"
+		]);
+
+		return redirect()->route('signas.index');
     }
 
     /**
@@ -56,7 +70,9 @@ class SignaController extends Controller
      */
     public function edit($id)
     {
-        //
+		$data = Signa::find($id);
+
+		return view('signas.form')->with(compact('data'));
     }
 
     /**
@@ -68,7 +84,19 @@ class SignaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+		]);
+
+		$db = Signa::find($id);
+		$db->update($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Saved successfully"
+		]);
+
+		return redirect()->route('signas.index');
     }
 
     /**
@@ -79,6 +107,7 @@ class SignaController extends Controller
      */
     public function destroy($id)
     {
-        //
+		Signa::find($id)->delete();
+		return redirect()->route('signas.index');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recipe;
+use Illuminate\Support\Facades\Session;
 
 class RecipeController extends Controller
 {
@@ -13,8 +15,8 @@ class RecipeController extends Controller
      */
     public function index()
     {
-		$medicines = Recipe::with('createdBy')->paginate(20);
-		return view('recipes.index', ['recipe' => $recipe]);
+		$recipes = Recipe::with('createdBy')->paginate(20);
+		return view('recipes.index', ['recipes' => $recipes]);
     }
 
     /**
@@ -42,7 +44,7 @@ class RecipeController extends Controller
 		$db = Recipe::create($request->all());
 		Session::flash("status", [
 			"level"=>"success",
-			"message"=>"Berhasil Di Simpan"
+			"message"=>"Saved Successfully"
 		]);
 
 		return redirect()->route('recipes.index');

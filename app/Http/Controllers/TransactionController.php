@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Session;
 
 class TransactionController extends Controller
 {
@@ -13,7 +15,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+		$transactions = Transaction::with('createdBy')->paginate(20);
+		return view('transactions.index', ['transactions' => $transactions]);
     }
 
     /**
@@ -23,7 +26,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+		return view('transactions.form');
     }
 
     /**
@@ -34,7 +37,18 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+		]);
+
+		$db = Transaction::create($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Saved successfully"
+		]);
+
+		return redirect()->route('transactions.index');
     }
 
     /**
@@ -56,7 +70,9 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+		$data = Transaction::find($id);
+
+		return view('transactions.form')->with(compact('data'));
     }
 
     /**
@@ -68,7 +84,19 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+		]);
+
+		$db = Transaction::find($id);
+		$db->update($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Saved successfully"
+		]);
+
+		return redirect()->route('transactions.index');
     }
 
     /**
@@ -79,6 +107,7 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+		Transaction::find($id)->delete();
+		return redirect()->route('transactions.index');
     }
 }

@@ -46,7 +46,7 @@ class MedicineController extends Controller
 		$db = Medicine::create($request->all());
 		Session::flash("status", [
 			"level"=>"success",
-			"message"=>"Berhasil Di Simpan"
+			"message"=>"Saved Successfully"
 		]);
 
 		return redirect()->route('medicines.index');
@@ -95,7 +95,7 @@ class MedicineController extends Controller
 		$db->update($request->all());
 		Session::flash("status", [
 			"level"=>"success",
-			"message"=>"Berhasil Di Simpan"
+			"message"=>"Saved Successfully"
 		]);
 
 		return redirect()->route('medicines.index');
