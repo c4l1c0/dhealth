@@ -29,6 +29,7 @@ return new class extends Migration
 				restrictOnUpdate()->
 				restrictOnDelete();
 			$table->foreignId('deleted_by')->
+				nullable()->
 				constrained('users')->
 				restrictOnUpdate()->
 				restrictOnDelete();
