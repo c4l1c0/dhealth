@@ -15,7 +15,7 @@ class MedicineController extends Controller
     public function index()
     {
 		$medicines = Medicine::all();
-		return view('medicine', ['medicines' => $medicines]);
+		return view('medicines.index', ['medicines' => $medicines]);
     }
 
     /**
