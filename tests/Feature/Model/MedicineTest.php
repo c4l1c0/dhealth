@@ -16,7 +16,7 @@ class MedicineTest extends TestCase
 		$user = User::factory()->create();
 		$this->actingAs($user);
 
-        $response = $this->get('/medicine');
+        $response = $this->get('/medicines');
 
         $response->assertStatus(200);
     }
