@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Medicine;
+use Illuminate\Support\Facades\Session;
 
 class MedicineController extends Controller
 {
@@ -14,7 +15,7 @@ class MedicineController extends Controller
      */
     public function index()
     {
-		$medicines = Medicine::all();
+		$medicines = Medicine::with('createdBy')->paginate(20);
 		return view('medicines.index', ['medicines' => $medicines]);
     }
 
@@ -25,7 +26,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
+		return view('medicines.form');
     }
 
     /**
@@ -36,7 +37,19 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+			'stock' => 'required|numeric'
+		]);
+
+		$db = Medicine::create($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Berhasil Di Simpan"
+		]);
+
+		return redirect()->route('medicines.index');
     }
 
     /**
@@ -58,7 +71,9 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
-        //
+		$data = Medicine::find($id);
+
+		return view('medicines.form')->with(compact('data'));
     }
 
     /**
@@ -70,7 +85,20 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$this->validate($request, [
+			'codename' => 'required',
+			'name' => 'required',
+			'stock' => 'required|numeric'
+		]);
+
+		$db = Medicine::find($id);
+		$db->update($request->all());
+		Session::flash("status", [
+			"level"=>"success",
+			"message"=>"Berhasil Di Simpan"
+		]);
+
+		return redirect()->route('medicines.index');
     }
 
     /**
@@ -81,6 +109,7 @@ class MedicineController extends Controller
      */
     public function destroy($id)
     {
-        //
+		Medicine::find($id)->delete();
+		return redirect()->route('medicines.index');
     }
 }
