@@ -22,10 +22,10 @@
 		</tr>
 		@forelse($medicines as $data)
 		<tr>
-			<th>{{ $data->codename}}</th>
-			<th>{{ $data->name}}</th>
-			<th>{{ $data->stock}}</th>
-			<th>{{ $data->added_by}}</th>
+			<td>{{ $data->codename}}</td>
+			<td>{{ $data->name}}</td>
+			<td>{{ $data->stock}}</td>
+			<td>{{ $data->created_by}}</td>
 		</tr>
 		@empty
 			<tr><td colspan="4">No Data</td></tr>
