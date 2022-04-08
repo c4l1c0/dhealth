@@ -20,4 +20,13 @@ class MedicineTest extends TestCase
 
         $response->assertStatus(200);
     }
+    public function test_medicine_form_page_can_be_rendered()
+    {
+		$user = User::factory()->create();
+		$this->actingAs($user);
+
+        $response = $this->get('/medicines/create');
+
+        $response->assertStatus(200);
+    }
 }
