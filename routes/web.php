@@ -18,13 +18,13 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+	Route::get('/', function () {
+		return view('dashboard');
+	});
 	Route::get('/dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
