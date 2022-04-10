@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+	Route::post('maketransaction', [TransactionController::class, 'bigstore']);
+
 	Route::resource('medicines', MedicineController::class);
 	Route::resource('signas', SignaController::class);
 	Route::resource('recipes', RecipeController::class);
