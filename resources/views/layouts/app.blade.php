@@ -39,7 +39,16 @@
                             <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                         </li>
 						<li class="nav-item">
+                            <a class="nav-link {{ Route::is('transactions.index') ? 'active' : '' }}" href="{{ route('transactions.index') }}">{{ __('Transactions') }}</a>
+                        </li>
+						<li class="nav-item">
+                            <a class="nav-link {{ Route::is('recipes.index') ? 'active' : '' }}" href="{{ route('recipes.index') }}">{{ __('Recipes') }}</a>
+                        </li>
+						<li class="nav-item">
                             <a class="nav-link {{ Route::is('medicines.index') ? 'active' : '' }}" href="{{ route('medicines.index') }}">{{ __('Medicines') }}</a>
+                        </li>
+						<li class="nav-item">
+                            <a class="nav-link {{ Route::is('signas.index') ? 'active' : '' }}" href="{{ route('signas.index') }}">{{ __('Signas') }}</a>
                         </li>
                     </ul>
 
