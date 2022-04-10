@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RecipeItem;
 use Illuminate\Http\Request;
 
 class RecipeItemController extends Controller

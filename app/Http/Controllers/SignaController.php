@@ -13,8 +13,15 @@ class SignaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+		if($request->input('q')=="vue"){
+			$signa = Signa::where('is_active',1)->get(['id','codename','name']);
+			foreach($signa AS $row){
+			    $row['label'] = $row['codename'].' : '.$row['name'];
+			}
+			return $signa;
+		}
 		$signas = Signa::with('createdBy')->paginate(20);
 		return view('signas.index', ['signas' => $signas]);
     }
