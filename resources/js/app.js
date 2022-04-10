@@ -19,7 +19,13 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('vselect', require('vue-select').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('transactionitemform', require('./components/TransactionItemForm.vue').default);
+Vue.component('customvselect', require('./components/CustomVSelect.vue').default);
+Vue.component('ttable', require('./components/TransactionTable.vue').default);
+Vue.component('sform', require('./components/StandaloneForm.vue').default);
+Vue.component('cform', require('./components/ConcoctionForm.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
