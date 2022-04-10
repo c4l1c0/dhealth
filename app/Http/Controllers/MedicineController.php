@@ -13,10 +13,23 @@ class MedicineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+		if($request->input('q')=="vue"){
+			$medicines = Medicine::where('is_active',1)->get(['id','codename','name','stock']);
+			foreach($medicines AS $row){
+			    $row['label'] = $row['codename'].' : '.$row['name'];
+			}
+			return $medicines;
+		}
 		$medicines = Medicine::with('createdBy')->paginate(20);
 		return view('medicines.index', ['medicines' => $medicines]);
+    }
+
+    public function rawIndex()
+    {
+		$medicines = Medicine::all();
+		return $medicines;
     }
 
     /**
